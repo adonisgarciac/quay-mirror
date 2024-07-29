@@ -20,18 +20,18 @@ jobs:
       - name: Run a config mirror repo
         run: |
           curl -X POST \
-          -H "Authorization: Bearer ${secrets.QUAY_TOKEN}" \
+          -H "Authorization: Bearer ${{ secrets.QUAY_TOKEN }}" \
           -H "Content-Type: application/json" \
-          --data '{"is_enabled": true, "external_reference": "${vars.EXTERNAL_REPO}", \
-          "external_registry_username": "${secrets.EXTERNAL_USER}", "external_registry_password": "${secrets.EXTERNAL_PASS}", \
-          "external_registry_config": {"unsigned_images":true, "verify_tls": false, \
-          "proxy": {"http_proxy": "http://proxy.tld", "https_proxy": "https://proxy.tld", "no_proxy": "domain"}}, \
-          "sync_interval": 600, "sync_start_date": "2024-07-28T11:11:39Z", "root_rule": {"rule_kind": "tag_glob_csv", "rule_value": [ "*" ]}, \
-          "robot_username": "${secrets.QUAY_ROBOT_ACCOUNT}"}' https://${vars.QUAY_REGISTRY}/api/v1/repository/${vars.QUAY_ORG}/${vars.QUAY_REPO}/mirror
+          --data '{ "is_enabled": true, "external_reference": "${{ vars.EXTERNAL_REPO }}", \
+          "external_registry_username": "${{ secrets.EXTERNAL_USER }}", "external_registry_password": "${{ secrets.EXTERNAL_PASS }}", \
+          "external_registry_config": { "unsigned_images":true, "verify_tls": false, \
+          "proxy": { "http_proxy": "http://proxy.tld", "https_proxy": "https://proxy.tld", "no_proxy": "domain" } }, \
+          "sync_interval": 600, "sync_start_date": "2024-07-28T11:11:39Z", "root_rule": {{ "rule_kind": "tag_glob_csv", "rule_value": [ "*" ] }}, \
+          "robot_username": "${{ secrets.QUAY_ROBOT_ACCOUNT }}" }' https://${{ vars.QUAY_REGISTRY }}/api/v1/repository/${{ vars.QUAY_ORG }}/${{ vars.QUAY_REPO }}/mirror
 
       - name: Run a change visibility curl command
         run: |
-            curl -X POST https://${vars.QUAY_REGISTRY}/api/v1/repository/${vars.QUAY_ORG}/${vars.QUAY_REPO}/changevisibility \
-            -H 'Authorization: Bearer {secrets.QUAY_TOKEN}' \
+            curl -X POST https://${{ vars.QUAY_REGISTRY }}/api/v1/repository/${{ vars.QUAY_ORG }}/${{ vars.QUAY_REPO }}/changevisibility \
+            -H 'Authorization: Bearer {{ secrets.QUAY_TOKEN }}' \
             -H 'Content-Type: application/json' \
-            -d '{"visibility": "public"}'
+            -d '{ "visibility": "public" }'

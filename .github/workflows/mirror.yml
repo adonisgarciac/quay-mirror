@@ -31,6 +31,6 @@ jobs:
       - name: Run a change visibility curl command
         run: |
           curl -X POST https://${{ vars.QUAY_REGISTRY }}/api/v1/repository/${{ vars.QUAY_ORG }}/${{ vars.QUAY_REPO }}/changevisibility \
-          -H "Authorization: Bearer ${{ secrets.QUAY_TOKEN }}" \            
-          -H 'Content-Type: application/json' \
+          -H "Authorization: Bearer ${{ secrets.QUAY_TOKEN }}" \
+          -H "Content-Type: application/json" \          
           -d '{ "visibility": "public" }' -k -v

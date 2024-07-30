@@ -31,8 +31,8 @@ jobs:
           -H "Content-Type: application/json" \
           -d '{ "is_enabled": true, "external_reference": "${{ vars.EXTERNAL_REPO }}", \
           "external_registry_username": "${{ secrets.EXTERNAL_USER }}", "external_registry_password": "${{ secrets.EXTERNAL_PASS }}", \
-          "external_registry_config": { "unsigned_images": true, "verify_tls": false }, \
-          "sync_interval": 600, "sync_start_date": "2024-07-28T11:11:39Z", "root_rule": { "rule_kind": "tag_glob_csv", "rule_value": [ "*" ] }, \
+          "external_registry_config": { "unsigned_images": True, "verify_tls": False }, \
+          "sync_interval": 600, "sync_start_date": "2024-07-28T11:11:39Z", "root_rule": { "rule_kind": "tag_glob_csv", "rule_value": ["*"] }, \
           "robot_username": "${{ secrets.QUAY_ROBOT_ACCOUNT }}" }' \
           https://${{ vars.QUAY_REGISTRY }}/api/v1/repository/${{ vars.QUAY_ORG }}/${{ vars.QUAY_REPO }}/mirror -k -v
 
@@ -41,5 +41,5 @@ jobs:
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.QUAY_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d '{ "visibility": "PUBLIC" }' \
+          -d '{ "visibility": "public" }' \
           https://${{ vars.QUAY_REGISTRY }}/api/v1/repository/${{ vars.QUAY_ORG }}/${{ vars.QUAY_REPO }}/changevisibility -k -v

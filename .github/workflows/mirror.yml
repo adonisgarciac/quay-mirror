@@ -26,7 +26,7 @@ jobs:
           
       - name: Run a config mirror repo
         run: |
-          curl -X POST \
+          curl -X PUT \
           -H "Authorization: Bearer ${{ secrets.QUAY_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{ "is_enabled": true, "external_reference": "${{ vars.EXTERNAL_REPO }}",

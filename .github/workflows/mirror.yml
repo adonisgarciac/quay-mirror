@@ -21,7 +21,7 @@ jobs:
           curl -X PUT \
           -H "Authorization: Bearer ${{ secrets.QUAY_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d '{ "state": "mirror" }, \
+          -d '{ "state": "mirror" }' \
           https://${{ vars.QUAY_REGISTRY }}/api/v1/repository/${{ vars.QUAY_ORG }}/${{ vars.QUAY_REPO }}/changestate -k -v
           
       - name: Run a config mirror repo
